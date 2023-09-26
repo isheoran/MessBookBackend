@@ -39,4 +39,11 @@ public class StudentDao {
 
         return student;
     }
+
+    public List<Student> getAllStudents() {
+        String query = "Select * from Student";
+        List<Student> students = jdbcTemplate.query(query,new BeanPropertyRowMapper<Student>(Student.class));
+
+        return students;
+    }
 }

@@ -7,6 +7,8 @@ import com.messBook.MessBook.Service.Models.UserLoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentService {
     @Autowired
@@ -31,5 +33,9 @@ public class StudentService {
         else {
             return null;
         }
+    }
+
+    public List<Student> getAllStudents() {
+        return studentDao.getAllStudents();
     }
 }

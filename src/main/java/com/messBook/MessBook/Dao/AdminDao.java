@@ -34,4 +34,10 @@ public class AdminDao {
         List<Admin> admins = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Admin.class), userName);
         return admins.isEmpty() ? null : admins.get(0);
     }
+
+    public List<Admin> getAllAdmins() {
+        String query = "SELECT * FROM Admin";
+        List<Admin> admins = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(Admin.class));
+        return admins;
+    }
 }

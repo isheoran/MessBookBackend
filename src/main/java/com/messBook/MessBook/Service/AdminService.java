@@ -6,7 +6,6 @@ import com.messBook.MessBook.Dao.MessDao;
 import com.messBook.MessBook.Entities.Admin;
 import com.messBook.MessBook.Entities.Menu;
 import com.messBook.MessBook.Entities.Mess;
-import com.messBook.MessBook.Entities.Student;
 import com.messBook.MessBook.Service.Models.UserDto;
 import com.messBook.MessBook.Service.Models.UserLoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;

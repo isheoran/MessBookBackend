@@ -1,8 +1,8 @@
 # MessBookBackend
 
-# Create Database MessBook in MySQL
+Create Database MessBook in MySQL
 
-# Run below SQL Script to create table for MySQL Database
+Run below SQL Script to create table for MySQL Database
 
 ```
 -- Use Database MessBook

@@ -4,7 +4,7 @@
 
 Create Database MessBook in MySQL
 
-Run below SQL Script to create table for MySQL Database
+Please run below SQL Script to create tables for MySQL Database
 
 ```
 -- Use Database MessBook

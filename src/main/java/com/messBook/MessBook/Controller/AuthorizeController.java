@@ -9,6 +9,8 @@ import com.messBook.MessBook.Service.Models.UserLoginRequest;
 import com.messBook.MessBook.Service.Models.UserRegisterRequest;
 import com.messBook.MessBook.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,22 +27,26 @@ public class AuthorizeController {
     AdminService adminService;
 
     @PostMapping("login")
-    public UserDto login(@RequestBody UserLoginRequest userLoginRequest) {
-        return authorizeService.login(userLoginRequest);
+    public ResponseEntity<UserDto> login(@RequestBody UserLoginRequest userLoginRequest) {
+
+        try {
+            return new ResponseEntity<>(authorizeService.login(userLoginRequest), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.out.println(""+e);
+
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("signup")
-    public UserDto register(@RequestBody UserRegisterRequest userRegisterRequest) {
+    public ResponseEntity<UserDto> register(@RequestBody UserRegisterRequest userRegisterRequest) {
         if(userRegisterRequest.getRole().equals("student")) {
             Student student = new Student(userRegisterRequest.getUser_name(),userRegisterRequest.getRoll_number(),userRegisterRequest.getName(),userRegisterRequest.getPassword(),userRegisterRequest.getRole());
             student = studentService.registerStudent(student);
-            return new UserDto(student.getUser_name(),student.getName(),student.getRole());
+            return new ResponseEntity<>(new UserDto(student.getUser_name(),student.getName(),student.getRole()),HttpStatus.OK);
         }
-        else {
-            Admin admin = new Admin(userRegisterRequest.getUser_name(),userRegisterRequest.getName(),userRegisterRequest.getPassword(),userRegisterRequest.getRole());
-            admin = adminService.register(admin);
 
-            return new UserDto(admin.getUser_name(),admin.getName(),admin.getRole());
-        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 }

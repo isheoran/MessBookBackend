@@ -7,6 +7,8 @@ import com.messBook.MessBook.Service.MessService.OrdersService;
 import com.messBook.MessBook.Service.MessService.PastOrders;
 import com.messBook.MessBook.Service.Models.OrdersRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,27 +29,67 @@ public class MessController {
     private PastOrders pastOrders;
 
     @GetMapping("/messList")
-    public List<MessDTO> getMessList() {
-        return messListService.messList();
+    public ResponseEntity<List<MessDTO>> getMessList() {
+        try {
+            return new ResponseEntity<>(messListService.messList(), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.out.println(""+e);
+
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @PostMapping("/submitOrder")
-    public boolean submitOrder(@RequestBody OrdersRequest ordersRequest) {
-        return ordersService.addOrder(ordersRequest);
+    public ResponseEntity<? extends Object> submitOrder(@RequestBody OrdersRequest ordersRequest) {
+        try {
+            return new ResponseEntity<>(ordersService.addOrder(ordersRequest), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.out.println(""+e);
+
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping("/pastOrders/{student_id}")
-    public List<PastOrdersDTO> getPastOrders(@PathVariable String student_id) {
-        return pastOrders.getPastOrders(student_id);
+    public ResponseEntity<List<PastOrdersDTO>> getPastOrders(@PathVariable String student_id) {
+        try {
+            return new ResponseEntity<>(pastOrders.getPastOrders(student_id), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.out.println(""+e);
+
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping("/pastResolvedOrders/{student_id}")
-    public List<PastOrdersDTO> getPastResolvedOrders(@PathVariable String student_id) {
-        return pastOrders.getPastResolvedOrders(student_id);
+    public ResponseEntity<List<PastOrdersDTO>> getPastResolvedOrders(@PathVariable String student_id) {
+        try {
+            return new ResponseEntity<>(pastOrders.getPastResolvedOrders(student_id), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.out.println(""+e);
+
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @GetMapping("/pastUnResolvedOrders/{student_id}")
-    public List<PastOrdersDTO> getPastUnResolvedOrders(@PathVariable String student_id) {
-        return pastOrders.getPastUnResolvedOrders(student_id);
+    public ResponseEntity<List<PastOrdersDTO>> getPastUnResolvedOrders(@PathVariable String student_id) {
+        try {
+            return new ResponseEntity<>(pastOrders.getPastUnResolvedOrders(student_id), HttpStatus.OK);
+        }
+        catch (Exception e) {
+            System.out.println(""+e);
+
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
     }
 }
